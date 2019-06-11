@@ -35,6 +35,7 @@ public class ControlerProduit {
 		model.addAttribute("pageCourante", p);
 		
 		return "produit";
+		//return "layout";
 	}
 	
 	@GetMapping(value = "/recherche")

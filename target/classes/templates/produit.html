@@ -1,179 +1,73 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-
-<title>GESTION DES PRODUIT</title>
-   <link rel="stylesheet" type="text/css"  
-   th:href="@{css/bootstrap.css}" />
-  <link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}"/>
-    <link th:href="@{assets/vendor/fonts/circular-std/style.css}" rel="stylesheet"/>
-    <link rel="stylesheet" th:href="@{assets/libs/css/style.css}"/>
-    <link rel="stylesheet" th:href="@{assets/vendor/fonts/fontawesome/css/fontawesome-all.css}"/>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<div th:insert="fragments/head.html :: head"> </div>
 <body>
-<div class="dashboard-main-wrapper">
-<div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="/">Produit</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
-                                </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        
-      
-                                
-                                
-<div class="container">
+<div th:insert="fragments/header.html :: header"> </div>
+	<div class="container" layout:fragment="content">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="card">
+				<div class="card-header row">
+						<div class="col-md-4">
+							<h3>Gestion des produits</h3>
+						</div>
+						<div class="col-md-8" align="right">
+							<a href="addProduit" class="btn btn-primary btn-flat btn-lg mt-3">
+								Ajouter</a>
 
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    
-                                    <div class="card">
-                                        <h5 class="card-header">
-                                        
-                                        
-                                        <div class="row">
-                                       <div class="col-md-4">
-                                       <h3>Gestion des produits </h3>
-                                       </div>
-                                       <div class="col-md-8" align="right">
-                                       <a href="addProduit"  class="btn btn-primary btn-flat btn-lg mt-3" >
-                                       Ajouter</a>
-                                       
-                                       </div>
-                                       </div>
-                                       
-                                        
-                    
-                                        </h5>
-                                        <div class="card-body">
-                                        <div>
-                                       <form action="/recherche" method="get">
-                                       <div class="row">
-                                       <div class="col-md-4">
-                                       <div class="form-group">
-                             <input type="text" class="form-control" name="motCle" placeholder="Entre le mot clé">
-                                       </div>
-                                       </div>
-                                       <div class="col-md-4">
-                                        <button type="submit" class="btn btn-primary">recherche</button>
-                                       </div>
-                                       </div>
-                                       
-                                       </form>
-                                        </div>
-                                            <table class="table">
-  <tr>
-    <th>ID</th>
-    <th>Désignation</th>
-    <th>Prix</th>
-    <th>Quantité</th>
-    <th></th>
-  </tr>
-  <tr th:each="p:${listeProduit}">
-    <td th:text="${p.id}"></td>
-    <td th:text="${p.designation}"></td>
-    <td th:text="${p.prix}"></td>
-    <td th:text="${p.quantite}"></td>
-    <td>
-    <a  class="btn btn-danger"  th:href="@{delete(id=${p.id})}" onclick="return confirm('Voullez vous supprime le produit ')"><i class="fas fa-trash"></i></a>
-    </td>
-  </tr>
-</table>
-<nav aria-label="...">
-          <ul class="pagination pagination-sm">
-                 <li th:class="${pageCourante}==${status.index}?'active':''" class="page-item" th:each="pa,status:${page}">
-                    <a  class="page-link"  th:href="@{/(page=${status.index})}" th:text="${status.index + 1}"></a>
-                  </li>
-          </ul>
-</nav>
-                                        </div>
-    
-                                    </div>
-                                </div>
+						</div>
+					</div>
+				<div class="card-body">
+					<div>
+						<form action="/recherche" method="get">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="text" class="form-control" name="motCle"
+											placeholder="Entre le mot clé">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<button type="submit" class="btn btn-primary">recherche</button>
+								</div>
+							</div>
 
-                                            
-                                            
-</div>
+						</form>
+					</div>
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Désignation</th>
+							<th>Prix</th>
+							<th>Quantité</th>
+							<th></th>
+						</tr>
+						<tr th:each="p:${listeProduit}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.designation}"></td>
+							<td th:text="${p.prix}"></td>
+							<td th:text="${p.quantite}"></td>
+							<td><a class="btn btn-danger"
+								th:href="@{delete(id=${p.id})}"
+								onclick="return confirm('Voullez vous supprime le produit ')"><i
+									class="fas fa-trash"></i></a></td>
+						</tr>
+					</table>
+					<nav aria-label="...">
+						<ul class="pagination pagination-sm">
+							<li th:class="${pageCourante}==${status.index}?'active':''"
+								class="page-item" th:each="pa,status:${page}"><a
+								class="page-link" th:href="@{/(page=${status.index})}"
+								th:text="${status.index + 1}"></a></li>
+						</ul>
+					</nav>
+				</div>
 
+			</div>
+		</div>
 
-
- <!-- basic modal start -->
-                  <!-- 
-                                <div class="modal fade" id="ajouter">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Ajouter un produit </h5>
-                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                            <form action="/save" method="POST">
-                                           <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Designation</label>
-                                            <input class="form-control" type="text" name="designation" th:value="${produits.designation}"  id="example-text-input">
-                                           </div>
-                                           
-                                           <div class="form-group">
-                                            <label for="example-search-input" class="col-form-label">Prix</label>
-                                            <input class="form-control" type="text" name="prix" th:value="${produits.prix}"   id="example-search-input">
-                                           </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="example-email-input" class="col-form-label">Quantite</label>
-                                            <input class="form-control" type="text" name="quantite" th:value="${produits.quantite}"  id="example-email-input">
-                                        </div>
-    
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" 
-                                                data-dismiss="modal">Fermer</button>
-                                                <button type="submit" class="btn btn-primary">
-                                                Ajouter</button>
-                                            </div>
-                                         </form>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                
-                                
-                          
-                   
-
-
-</div>
-
+	</div>
 </body>
- <!-- offset area end -->
-    <!-- jquery latest version -->
-    <script th:src="@{assets/js/vendor/jquery-2.2.4.min.js}"></script>
-    <!-- bootstrap 4 js -->
-    <script th:src="@{assets/js/popper.min.js}"></script>
-    <script th:src="@{assets/js/bootstrap.min.js}"></script>
-    <script th:src="@{assets/js/owl.carousel.min.js}"></script>
-    <script th:src="@{assets/js/metisMenu.min.js}"></script>
-    <script th:src="@{assets/js/jquery.slimscroll.min.js}"></script>
-    <script th:src="@{assets/js/jquery.slicknav.min.js}"></script>
-
-    <!-- others plugins -->
-    <script th:src="@{assets/js/plugins.js}"></script>
-    <script th:src="@{assets/js/scripts.js}"></script>
-
 </html>
